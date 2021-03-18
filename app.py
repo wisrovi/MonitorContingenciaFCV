@@ -9,7 +9,8 @@ app = Flask(__name__)
 def monitor_contingencia(topic, msg):
     parametros = dict()
     try:
-        BOT = "1710778365:AAFaexosrl1WMec2al5AQ_D45q00dxHHxHQ"
+        # BOT = "1710778365:AAFaexosrl1WMec2al5AQ_D45q00dxHHxHQ"
+        BOT = "1796457080:AAEl95krlisiqqta_QbGO5Ytn7d9cIeeEms"
         parametros['chat_id'] = int(topic)
         parametros['text'] = str(msg)
 
