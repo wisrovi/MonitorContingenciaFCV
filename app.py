@@ -7,6 +7,7 @@ from Util.Util import Util
 
 app = Flask(__name__)
 
+
 # @app.route('/MonitorContingencia/<topic>/<msg>', methods=['GET'])
 # def monitor_contingencia(topic, msg):
 #     parametros = dict()
@@ -20,10 +21,6 @@ app = Flask(__name__)
 #     except:
 #         parametros['error'] = 'No se pudo enviar el mensaje a telegram'
 #     return jsonify(parametros)
-
-
-util = Util()
-telegram = Telegram()
 
 
 @app.route('/MonitorContingencia', methods=['GET'])
@@ -42,5 +39,12 @@ def monitor_contingencia():
 
 
 if __name__ == '__main__':
+    from decouple import config
+
+    TOKEN = config('TOKEN', default='')
+
     # app.run()
     app.run(debug=True, host='172.30.19.56', port=51172)
+
+    util = Util()
+    telegram = Telegram(TOKEN)
