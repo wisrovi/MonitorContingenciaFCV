@@ -32,13 +32,22 @@ def monitor_contingencia():
     if request.method == 'GET':
         id_client_telegram = request.values.get('id')
         msn = request.values.get('msn')
-        msnBase64 = util.decoBase64UrlSafe(msn)
+
+        message_ok = False
+        msnBase64 = None
         try:
-            telegram.send(id_client_telegram, msnBase64)
-            respuesta['chat'] = id_client_telegram
-            respuesta['text'] = msn
+            msnBase64 = util.decoBase64UrlSafe(msn)
+            message_ok = True
         except:
-            respuesta['error'] = "message not sent"
+            respuesta["error"] ="message wasn't in base64"
+
+        if message_ok:
+            try:
+                telegram.send(id_client_telegram, msnBase64)
+                respuesta['chat'] = id_client_telegram
+                respuesta['text'] = msn
+            except:
+                respuesta['error'] = "message not sent"
     else:
         respuesta['error'] = "Not method get"
     return jsonify(respuesta)
