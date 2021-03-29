@@ -30,9 +30,12 @@ def monitor_contingencia():
         id_client_telegram = request.values.get('id')
         msn = request.values.get('msn')
         msnBase64 = util.decoBase64UrlSafe(msn)
-        telegram.send(id_client_telegram, msnBase64)
-        respuesta['chat'] = id_client_telegram
-        respuesta['text'] = msn
+        try:
+            telegram.send(id_client_telegram, msnBase64)
+            respuesta['chat'] = id_client_telegram
+            respuesta['text'] = msn
+        except:
+            respuesta['error'] = "message not sent"
     else:
         respuesta['error'] = "Not method get"
     return jsonify(respuesta)
@@ -44,7 +47,7 @@ if __name__ == '__main__':
     TOKEN = config('TOKEN', default='')
 
     # app.run()
-    app.run(debug=True, host='172.30.19.56', port=51172)
+    app.run(debug=True, host='172.30.19.88', port=47474)
 
     util = Util()
     telegram = Telegram(TOKEN)
