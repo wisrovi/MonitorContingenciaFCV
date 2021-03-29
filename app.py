@@ -22,6 +22,9 @@ app = Flask(__name__)
 #         parametros['error'] = 'No se pudo enviar el mensaje a telegram'
 #     return jsonify(parametros)
 
+util = None
+telegram = None
+
 
 @app.route('/MonitorContingencia', methods=['GET'])
 def monitor_contingencia():
