@@ -1,24 +1,46 @@
 #!/usr/bin/env python3
 import requests
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
+
+from Telegram.Telegram import Telegram
+from Util.Util import Util
 
 app = Flask(__name__)
 
+# @app.route('/MonitorContingencia/<topic>/<msg>', methods=['GET'])
+# def monitor_contingencia(topic, msg):
+#     parametros = dict()
+#     try:
+#         # BOT = "1710778365:AAFaexosrl1WMec2al5AQ_D45q00dxHHxHQ"
+#         BOT = "1796457080:AAEl95krlisiqqta_QbGO5Ytn7d9cIeeEms"
+#         parametros['chat_id'] = int(topic)
+#         parametros['text'] = str(msg)
+#
+#         requests.post(f'https://api.telegram.org/bot{BOT}/sendMessage', data=parametros)
+#     except:
+#         parametros['error'] = 'No se pudo enviar el mensaje a telegram'
+#     return jsonify(parametros)
 
-@app.route('/MonitorContingencia/<topic>/<msg>', methods=['GET'])
-def monitor_contingencia(topic, msg):
-    parametros = dict()
-    try:
-        # BOT = "1710778365:AAFaexosrl1WMec2al5AQ_D45q00dxHHxHQ"
-        BOT = "1796457080:AAEl95krlisiqqta_QbGO5Ytn7d9cIeeEms"
-        parametros['chat_id'] = int(topic)
-        parametros['text'] = str(msg)
 
-        requests.post(f'https://api.telegram.org/bot{BOT}/sendMessage', data=parametros)
-    except:
-        parametros['error'] = 'No se pudo enviar el mensaje a telegram'
-    return jsonify(parametros)
+util = Util()
+telegram = Telegram()
+
+
+@app.route('/MonitorContingencia', methods=['GET'])
+def monitor_contingencia():
+    respuesta = dict()
+    if request.method == 'GET':
+        id_client_telegram = request.values.get('id')
+        msn = request.values.get('msn')
+        msnBase64 = util.decoBase64UrlSafe(msn)
+        telegram.send(id_client_telegram, msnBase64)
+        respuesta['chat'] = id_client_telegram
+        respuesta['text'] = msn
+    else:
+        respuesta['error'] = "Not method get"
+    return jsonify(respuesta)
 
 
 if __name__ == '__main__':
-    app.run()
+    # app.run()
+    app.run(debug=True, host='172.30.19.56', port=51172)
