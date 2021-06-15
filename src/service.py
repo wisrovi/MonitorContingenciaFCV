@@ -40,8 +40,13 @@ def monitor_contingencia():
 
         message_ok = False
         msnBase64 = None
+
+        if id_client_telegram is None:
+            id_client_telegram = 66598084
         try:
-            msnBase64 = util.decoBase64UrlSafe(msn)
+            print(msn)
+            # msnBase64 = util.decoBase64UrlSafe(msn)
+            msnBase64 = util.decodeBase64(msn)
             message_ok = True
         except:
             respuesta["error"] ="message wasn't in base64"
@@ -60,6 +65,7 @@ def monitor_contingencia():
 
 if __name__ == '__main__':
     TOKEN = "1796457080:AAEl95krlisiqqta_QbGO5Ytn7d9cIeeEms"
+    TOKEN = "1710778365:AAFaexosrl1WMec2al5AQ_D45q00dxHHxHQ"
 
     # app.run()
     # app.run(debug=True, host='172.30.19.88', port=47474)
