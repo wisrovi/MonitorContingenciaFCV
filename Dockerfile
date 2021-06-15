@@ -1,5 +1,5 @@
 # 1) indicamos la imagen base a usar
-FROM arm32v7/python:3.6.13-buster
+FROM faucet/python3
 
 #Author and Maintainer
 MAINTAINER wisrovi.rodriguez@gmail.com
