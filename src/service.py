@@ -26,6 +26,11 @@ util = None
 telegram = None
 
 
+@app.route('/')
+def hola():
+    return 'monitor contingencia FCV by Wisrovi'
+
+
 @app.route('/MonitorContingencia', methods=['GET'])
 def monitor_contingencia():
     respuesta = dict()

@@ -3,11 +3,12 @@ services:
    monitor_contingencia:
       container_name: monitor_contingencia
       image: monitor_contingencia:V1
-      network_mode: host
+      ports:
+         - 47474:47474
       restart: always
       privileged: true
       healthcheck:
-         test: [ "CMD","curl","-f", "http://localhost:5001/help" ]
+         test: [ "CMD","curl","-f", "http://localhost:47474/" ]
          interval: 1m30s
          timeout: 10s
          retries: 3
