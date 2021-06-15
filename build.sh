@@ -1,0 +1,1 @@
+sudo docker build -t "monitor_contingencia:V1" .
