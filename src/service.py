@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
     # app.run()
     # app.run(debug=True, host='172.30.19.88', port=47474)
-    app.run(debug=True, host='0.0.0.0', port=47474)
+    app.run(debug=True, host='0.0.0.0', port=47475)
 
     util = Util()
     telegram = Telegram(TOKEN)
