@@ -5,9 +5,9 @@ FROM arm32v7/python:3.6.13-buster
 MAINTAINER wisrovi.rodriguez@gmail.com
 
 # 2) creamos una carpeta para alojar los archivos del proyecto
-WORKDIR /MonitorContingencia
+WORKDIR /monitor_contingencia
 
-RUN echo MonitorContingencia
+RUN echo monitor_contingencia
 
 # 3) instalamos sudo y actualizamos
 RUN apt-get update -y
@@ -28,7 +28,7 @@ RUN sudo pip3 install -r requirements.txt
 COPY src .
 
 # 7) le damos permisos a la carpeta donde se alojan los archivos del proyecto para que los archivos python puedan trabajar sin problemas
-RUN sudo chmod -R +777 /MonitorContingencia
+RUN sudo chmod -R +777 /monitor_contingencia
 
 # 8) le decimos que archivo ejecutar cuando se lance el container
 # CMD [ "tail" ,"-f", "/etc/hosts" ]
