@@ -59,9 +59,7 @@ def monitor_contingencia():
 
 
 if __name__ == '__main__':
-    from decouple import config
-
-    TOKEN = config('TOKEN', default='')
+    TOKEN = "1796457080:AAEl95krlisiqqta_QbGO5Ytn7d9cIeeEms"
 
     # app.run()
     app.run(debug=True, host='172.30.19.88', port=47474)
