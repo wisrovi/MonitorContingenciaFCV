@@ -5,8 +5,10 @@ from flask import Flask, jsonify, request
 from Telegram.Telegram import Telegram
 from Util.Util import Util
 
-app = Flask(__name__)
+TOKEN = "1710778365:AAFaexosrl1WMec2al5AQ_D45q00dxHHxHQ"
 
+
+app = Flask(__name__)
 
 # @app.route('/MonitorContingencia/<topic>/<msg>', methods=['GET'])
 # def monitor_contingencia(topic, msg):
@@ -31,6 +33,11 @@ def hola():
     return 'monitor contingencia FCV by Wisrovi'
 
 
+@app.route('/help')
+def help():
+    return 'monitor contingencia FCV by Wisrovi'
+
+
 @app.route('/MonitorContingencia', methods=['GET'])
 def monitor_contingencia():
     respuesta = dict()
@@ -44,16 +51,23 @@ def monitor_contingencia():
         if id_client_telegram is None:
             id_client_telegram = 66598084
         try:
-            print(msn)
             # msnBase64 = util.decoBase64UrlSafe(msn)
-            msnBase64 = util.decodeBase64(msn)
+            msnBase64 = msn  # util.decodeBase64(msn)
             message_ok = True
         except:
-            respuesta["error"] ="message wasn't in base64"
+            respuesta["error"] = "message wasn't in base64"
 
         if message_ok:
             try:
-                telegram.send(id_client_telegram, msnBase64)
+                print(id_client_telegram, msnBase64)
+
+                # https://api.telegram.org/bot1710778365:AAFaexosrl1WMec2al5AQ_D45q00dxHHxHQ/sendMessage?chat_id=665928084&text=hola
+
+                url = "https://api.telegram.org/bot" + TOKEN + "/sendMessage?chat_id=" + str(
+                    id_client_telegram) + "&text=" + str(msnBase64)
+                r = requests.get(url)
+
+                # telegram.send(id_client_telegram, msnBase64)
                 respuesta['chat'] = id_client_telegram
                 respuesta['text'] = msn
             except:
@@ -64,9 +78,6 @@ def monitor_contingencia():
 
 
 if __name__ == '__main__':
-    TOKEN = "1796457080:AAEl95krlisiqqta_QbGO5Ytn7d9cIeeEms"
-    TOKEN = "1710778365:AAFaexosrl1WMec2al5AQ_D45q00dxHHxHQ"
-
     # app.run()
     # app.run(debug=True, host='172.30.19.88', port=47474)
     app.run(debug=True, host='0.0.0.0', port=47475)

@@ -26,8 +26,24 @@ class Telegram(object):
 
 
 if __name__ == '__main__':
-    from decouple import config
-    TOKEN = config('TOKEN', default='')
+    TOKEN = "1710778365:AAFaexosrl1WMec2al5AQ_D45q00dxHHxHQ"
 
     telegram = Telegram(TOKEN)
     telegram.send(665928084, "Hola mundo")
+    telegram.send(622738755, "Hola mundo")
+    telegram.send(-510828903, "Hola mundo")
+
+    # https://xabaras.medium.com/sending-a-message-to-a-telegram-channel-the-easy-way-eb0a0b32968
+    # https://api.telegram.org/bot1710778365:AAFaexosrl1WMec2al5AQ_D45q00dxHHxHQ/sendMessage?chat_id=665928084&text=hola
+
+    print("mensaje enviado")
+
+    import requests
+    id_client_telegram = 665928084
+    msnBase64 = "Holitas"
+    TOKEN = "1710778365:AAFaexosrl1WMec2al5AQ_D45q00dxHHxHQ"
+    url = "https://api.telegram.org/bot" + TOKEN + "/sendMessage?chat_id=" + str(
+        id_client_telegram) + "&text=" + str(msnBase64)
+
+    r = requests.get(url)
+    print(r.text)
