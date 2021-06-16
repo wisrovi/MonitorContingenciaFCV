@@ -52,7 +52,7 @@ def monitor_contingencia():
             id_client_telegram = 66598084
         try:
             # msnBase64 = util.decoBase64UrlSafe(msn)
-            
+
             msnBase64 = Util().decodeBase64(msn).decode('utf-8')
             print(msnBase64)
             message_ok = True
